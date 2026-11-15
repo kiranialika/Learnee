@@ -101,7 +101,6 @@ Robot belajar bulat putih-biru bertopi toga dan kacamata kuning-biru, dengan eks
 - Deteksi event `online`/`offline` browser otomatis, plus tombol simulasi **Mode Offline** di navbar.
 - Saat Mode Offline aktif:
   - Indikator navbar berubah menjadi "Mode Offline".
-  - Muncul banner ramah dari Lee.
   - Beranda, Tentang Kami, Fasilitas, FAQ, serta Ringkasan Materi & Bank Soal yang tersimpan tetap dapat diakses penuh tanpa error.
   - Fitur real-time (kirim chat baru, putar video online, upload dokumen verifikasi, klaim fee) dinonaktifkan sementara dengan pesan informatif.
 - Sertakan registrasi **Service Worker (`sw.js`)** agar halaman tahan *refresh* saat offline.

@@ -47,7 +47,6 @@ function chrome(){
  n.classList.toggle('is-offline',o);n.classList.toggle('is-online',!o);
  $('#offBtn').textContent=S.off?'Kembali Online':'Simulasi Offline';
  $('#role').value=S.role;
- $('#offBanner').innerHTML=o?`<div class="bg-amber-100 border-b border-amber-300"><div class="max-w-6xl mx-auto px-4 py-2 flex items-center gap-3 text-amber-900 text-sm">${lee('offline',54)}<p><b>Lee di sini!</b> Kamu sedang offline. Ringkasan Materi & Bank Soal tetap bisa dibuka. Chat, video, upload dokumen, dan klaim fee aktif lagi saat online.</p></div></div>`:'';
  $('#fab').innerHTML=lee('help',48);
 }
 function go(r,sec){S.role=r;S.modal=null;render();if(sec)setTimeout(()=>document.getElementById(sec)?.scrollIntoView(),50);else scrollTo(0,0)}
