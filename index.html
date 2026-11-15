@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="utf-8">
@@ -6,307 +6,37 @@
 <title>Learnee — Belajar Bebas Batas, Tembus PTN Impian</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-<style>
-:root{--bg:#F8FAFC;--sf:#FFFFFF;--tx:#0F172A;--mu:#64748B;--bd:#E2E8F0;--pb:#2563EB;--ay:#FACC15;--gr:#10B981;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1220;--sf:#111B2E;--tx:#E5EDFA;--mu:#94A3B8;--bd:#22324D;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0B1220;--sf:#111B2E;--tx:#E5EDFA;--mu:#94A3B8;--bd:#22324D;color-scheme:dark}
-html{scroll-padding-top:110px;scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',Inter,system-ui,sans-serif;background:var(--bg);color:var(--tx)}
-.card{background:var(--sf);border:1px solid var(--bd);border-radius:16px}
-.mu{color:var(--mu)}.bd{border-color:var(--bd)}.sf{background:var(--sf)}
-.btn{border-radius:12px;padding:.6rem 1.1rem;font-weight:700;font-size:.875rem;transition:.15s;cursor:pointer}
-.btn-p{background:var(--pb);color:#fff}.btn-p:hover{filter:brightness(1.1)}
-.btn-o{border:1.5px solid var(--pb);color:var(--pb)}
-.btn:disabled{opacity:.45;cursor:not-allowed;filter:none}
-.chip{border:1px solid var(--bd);border-radius:999px;padding:.3rem .8rem;font-size:.8rem;font-weight:600;cursor:pointer;background:var(--sf)}
-.chip.on{background:var(--pb);color:#fff;border-color:var(--pb)}
-.inp{width:100%;border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:12px;padding:.6rem .8rem;font-size:.9rem}
-.gold{background:var(--ay);color:#422006;border-radius:999px;font-size:.7rem;font-weight:800;padding:.15rem .6rem}
-.bar{height:10px;border-radius:99px;background:var(--bd);overflow:hidden}.bar>i{display:block;height:100%;background:var(--pb);transition:width .5s}
-#modal{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:60;display:none;align-items:center;justify-content:center;padding:1rem}
-#modal.show{display:flex}
-button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--ay);outline-offset:2px}
-</style>
-<style>
-:root{--bg:#fff;--sf:#fff;--tx:#172554;--mu:#64748b;--bd:#e7eaf2;--pb:#4f46e5;--ay:#facc15;--gr:#10b981}
-body{background:#fff;color:#172554;letter-spacing:-.01em}
-header.sticky{background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-color:#eef0f5;box-shadow:0 4px 24px rgba(30,41,59,.04)}
-#app{max-width:1180px}
-#beranda{position:relative;isolation:isolate;min-height:460px;margin-top:24px;padding:64px 56px;border-radius:32px;background:radial-gradient(ellipse at 82% 24%,#e9e7ff 0,transparent 36%),linear-gradient(135deg,#f7f6ff 0%,#fbfbff 60%,#fff8db 100%);overflow:hidden}
-#beranda:before{content:'';position:absolute;right:8%;top:8%;font-size:32px;color:#f1c94b;letter-spacing:26px;z-index:-1}
-#beranda h1{max-width:640px;font-size:clamp(2.8rem,5vw,4.4rem);line-height:1.05;letter-spacing:-.06em;color:#17153d}
-#beranda>div:first-child>p{font-size:1.05rem;line-height:1.8;color:#626784}
-#beranda .gold{background:#eeebff;color:#5146c8;padding:.45rem .8rem}
-#beranda .btn{padding:.8rem 1.25rem;border-radius:999px}
-#beranda .btn-p{background:#5146d8;box-shadow:0 8px 20px rgba(81,70,216,.22)}
-#beranda .btn-o{border-color:#d8d5f6;color:#5146d8;background:#fff}
-#beranda [class~="md:col-span-2"]{gap:14px;margin-top:20px}
-#beranda [class~="md:col-span-2"] .card{background:rgba(255,255,255,.86);border:1px solid rgba(226,225,245,.9);border-radius:20px;padding:20px;box-shadow:0 8px 24px rgba(31,35,82,.05);transition:transform .2s,box-shadow .2s}
-#beranda [class~="md:col-span-2"] .card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(31,35,82,.1)}
-#beranda [class~="md:col-span-2"] .card b{font-size:1.05rem;color:#25204f}
-#sesi,#fasilitas,#tentang,#testimoni,#faq{scroll-margin-top:120px;padding-top:72px;padding-bottom:32px}
-#sesi h2,#fasilitas h2,#tentang h2,#testimoni h2,#faq h2{font-size:2rem;letter-spacing:-.04em;color:#201d46}
-.card{border-color:#ececf4;border-radius:20px;box-shadow:0 5px 20px rgba(29,35,74,.035)}
-.chip{border-color:#e7e5f3;border-radius:999px;padding:.55rem .95rem;color:#53556d}
-.chip.on{background:#5146d8;border-color:#5146d8}
-.btn{border-radius:999px}.btn-p{background:#5146d8}.btn-o{border-color:#5146d8;color:#5146d8}
-#sesi .card,#fasilitas .card,#testimoni .card{transition:transform .2s,box-shadow .2s}
-#sesi .card:hover,#fasilitas .card:hover,#testimoni .card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(31,35,82,.08)}
-footer{color:#353254}
-@media(max-width:767px){#beranda{padding:36px 22px;border-radius:24px;min-height:0;margin-top:14px}#beranda>div:nth-child(2){min-height:180px}#beranda h1{font-size:2.65rem}#sesi,#fasilitas,#tentang,#testimoni,#faq{padding-top:48px}}
-</style>
-<style>
-:root{--pb:#4f46d8;--bg:#f8fbff;--sf:#fff;--tx:#18202c;--mu:#626d7e;--bd:#e6edf2}
-body{background-color:#f8fbff;background-image:radial-gradient(circle,rgba(95,138,164,.12) .8px,transparent .9px),radial-gradient(ellipse at 12% 13%,rgba(176,235,250,.45),transparent 31%),radial-gradient(ellipse at 87% 20%,rgba(224,247,160,.38),transparent 28%);background-size:18px 18px,auto,auto;background-attachment:fixed;color:#17202c}
-header.sticky{background:rgba(255,255,255,.9);backdrop-filter:blur(16px);box-shadow:0 2px 18px rgba(49,74,94,.06)}
-#nav1{gap:.85rem;font-size:.78rem;white-space:nowrap}
-.brand-mascot{width:38px;height:38px;object-fit:cover;object-position:center;border-radius:0}
-.learnee-mascot{display:block;height:auto;max-width:100%;object-fit:contain}
-#beranda{max-width:none;min-height:0;margin:0 -1rem;padding:62px max(2rem,calc((100vw - 1120px)/2)) 38px;border-radius:0;background:transparent;overflow:visible;row-gap:24px}
-#beranda:before{content:none}
-#beranda h1{max-width:700px;font-size:clamp(3rem,6.5vw,5rem);line-height:.99;letter-spacing:-.065em;color:#111820}
-#beranda>div:first-child>p{max-width:570px;color:#697383;font-size:1.12rem;line-height:1.65}
-.eyebrow{font-weight:700;font-size:.88rem;color:#586678}
-#beranda .gold{background:#edebff;color:#5146c8}
-#beranda .btn{padding:.82rem 1.35rem}
-#beranda .btn-p{background:#4f46d8;box-shadow:0 8px 20px rgba(79,70,216,.18)}
-#beranda .btn-o{color:#4f46d8;border-color:#d9d7f0;background:#fff}
-.hero-mascot-wrap{position:relative;min-height:480px;align-items:center;border-radius:0;background:transparent}
-#beranda>div:nth-child(2){background:transparent!important;border-radius:0}
-.hero-mascot-wrap>.learnee-mascot{height:410px;width:300px!important;object-fit:cover;object-position:center;transform:translate(20px,12px);filter:drop-shadow(0 16px 14px rgba(47,88,105,.12))}
-.mascot-note{position:absolute;z-index:1;top:0;left:0;padding:11px 16px;background:#fff;border:1px solid #edf0f4;border-radius:16px;box-shadow:0 7px 18px rgba(34,51,68,.1);font-size:.8rem;font-weight:800;color:#273244}
-.mascot-note-bottom{top:auto;left:auto;right:0;bottom:0;color:#39743f}
-.study-story{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:36px;padding:58px 38px 44px;border-radius:0;background:transparent}
-.study-copy h2{max-width:650px;margin-top:12px;font-size:clamp(2.5rem,5vw,4.15rem);line-height:1;letter-spacing:-.065em;color:#111820}
-.study-copy p{max-width:570px;margin-top:18px;color:#697383;font-size:1.05rem;line-height:1.75}
-.study-art{position:relative;min-height:430px;display:grid;place-items:center;border-radius:0;background:transparent}
-.study-art>.learnee-mascot{height:370px;width:270px!important;object-fit:cover;object-position:center;transform:translateY(8px);filter:drop-shadow(0 14px 13px rgba(47,88,105,.12))}
-.study-note{position:absolute;right:0;bottom:0;padding:11px 15px;border:1px solid #ebeff3;border-radius:16px;background:#fff;box-shadow:0 7px 18px rgba(34,51,68,.08);font-size:.76rem;font-weight:800;color:#527e45}
-#beranda>div:nth-child(2),.hero-mascot-wrap,.study-story,.study-art{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;outline:0!important}
-.hero-mascot-wrap>.learnee-mascot,.study-art>.learnee-mascot{background:none!important;border:0!important;box-shadow:none!important;filter:drop-shadow(0 16px 18px rgba(28,52,68,.24))!important}
-.learning-hub{padding:24px;border:1px solid rgba(225,234,239,.9);border-radius:26px;background:rgba(255,255,255,.88);box-shadow:0 10px 30px rgba(44,68,83,.05)}
-.learning-hub .card{background:#fff;border-color:#e8edf2}
-.learning-hub .chip:not(.on){background:#fff;color:#556174;border-color:#e5ebf0}
-.learning-hub-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.learning-hub-head h3{font-size:1.45rem;letter-spacing:-.04em;color:#17202c}
-.learning-hub-head p{font-size:.84rem;color:#768192}
-.learning-hub-head .hub-switch{margin-left:auto;display:flex;gap:8px}
-.learning-hub .subject-tabs,.learning-hub .content-tabs{display:flex;gap:8px;flex-wrap:wrap}
-.learning-hub .content-tabs{margin-top:17px;margin-bottom:16px;padding-bottom:15px;border-bottom:1px solid #e8edf2}
-#sesi,#fasilitas,#tentang,#testimoni,#faq{padding-top:64px}
-@media(max-width:1023px){#nav1{gap:.55rem;font-size:.7rem}}
-@media(max-width:767px){#beranda{margin:0 -1rem;padding:36px 22px 26px;row-gap:14px}#beranda h1{font-size:2.8rem}#beranda>div:nth-child(2){min-height:430px!important}.hero-mascot-wrap{min-height:430px}.hero-mascot-wrap>.learnee-mascot{height:350px;width:255px!important;object-fit:cover;object-position:center;transform:translate(20px,12px)}.mascot-note{top:0;left:0}.mascot-note-bottom{top:auto;bottom:0;right:0}.study-story{grid-template-columns:1fr;gap:8px;padding:38px 12px 25px}.study-copy h2{font-size:2.8rem}.study-art{min-height:430px}.study-art>.learnee-mascot{height:310px;width:230px!important;object-fit:cover;object-position:center;transform:translateY(8px)}.study-note{right:0;bottom:0}.learning-hub{padding:16px;border-radius:20px}.learning-hub-head .hub-switch{margin-left:0}#nav1{font-size:.75rem}}
-</style>
+<link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<header class="sticky top-0 z-50 sf border-b bd" style="top:0">
+<!-- Site header and navigation -->
+<header class="sticky top-0 z-50 sf border-b bd">
   <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3 justify-between">
-    <a href="#beranda" onclick="go('student')" class="flex items-center gap-2 font-extrabold text-xl" style="color:var(--pb)">
+    <a href="#beranda" data-action="home" class="brand-link flex items-center gap-2 font-extrabold text-xl">
       <img src="./assets/maskot-bandeng.png?v=2" alt="" class="brand-mascot">Learnee</a>
     <nav class="hidden lg:flex gap-5 text-sm font-semibold" id="nav1"></nav>
     <div class="flex items-center gap-2 flex-wrap justify-end">
       <span id="net" class="text-xs font-bold px-3 py-1 rounded-full"></span>
-      <button class="btn bd border text-xs" id="offBtn" onclick="toggleOff()"></button>
-      <select id="role" class="inp !w-auto !py-1.5 text-xs font-bold" onchange="go(this.value)" aria-label="Switch role">
+      <button class="btn bd border text-xs" id="offBtn" type="button"></button>
+      <select id="role" class="inp !w-auto !py-1.5 text-xs font-bold" aria-label="Switch role">
         <option value="student">Siswa</option><option value="teacher">Guru</option><option value="admin">Admin</option></select>
-      <button class="btn btn-p hidden sm:block" onclick="go('student','sesi')">Mulai Belajar Gratis</button>
+      <button class="btn btn-p hidden sm:block" type="button" data-action="start-learning">Mulai Belajar Gratis</button>
     </div>
   </div>
   <nav class="lg:hidden flex gap-4 px-4 pb-2 overflow-x-auto text-sm font-semibold whitespace-nowrap" id="nav2"></nav>
 </header>
+<!-- Offline status message -->
 <div id="offBanner"></div>
+<!-- Main content is rendered by the application -->
 <main id="app" class="max-w-6xl mx-auto px-4 pb-24"></main>
-<div id="modal" onclick="if(event.target.id==='modal'&&S.modal&&S.modal.t!=='rate')closeM()"></div>
-<div id="toast" class="fixed left-1/2 -translate-x-1/2 bottom-6 z-[70] hidden px-4 py-2 rounded-xl text-sm font-bold text-white" style="background:#0F172A"></div>
-<button onclick="helpLee()" aria-label="Bantuan Lee" class="fixed right-4 bottom-4 z-40 card p-1 shadow-lg" style="border-radius:999px" id="fab"></button>
+<!-- Modal, toast, and quick help controls -->
+<div id="modal"></div>
+<div id="toast" class="fixed left-1/2 -translate-x-1/2 bottom-6 z-[70] hidden px-4 py-2 rounded-xl text-sm font-bold text-white" role="status" aria-live="polite"></div>
+<button type="button" aria-label="Bantuan Lee" class="fixed right-4 bottom-4 z-40 card p-1 shadow-lg" id="fab"></button>
 
-<script>
-/* ---------- Data ---------- */
-const SN=['PU','PPU','PBM','PK','Literasi B. Indonesia','Literasi B. Inggris','Penalaran Matematika'];
-const TK=['Matematika Lanjut','Fisika','Kimia','Biologi','Ekonomi','Sosiologi','Geografi','Sejarah'];
-const BANK={
-'PK':{s:'Konsep inti: bilangan, aljabar dasar, perbandingan, dan peluang sederhana. Selalu ubah soal cerita menjadi persamaan sebelum menghitung.',q:[['Jika 3x + 5 = 20, nilai 2x adalah…',['5','10','15','7'],1,'3x = 15 → x = 5 → 2x = 10.']]},
-'Fisika':{s:'Konsep inti: GLB, GLBB, Hukum Newton, usaha-energi. Gunakan diagram gaya sebelum memasukkan rumus.',q:[['Benda 2 kg dipercepat 3 m/s². Gaya resultan?',['3 N','5 N','6 N','1,5 N'],2,'F = m·a = 2×3 = 6 N.']]},
-'Kimia':{s:'Konsep inti: stoikiometri, mol, larutan, dan kesetimbangan. Mol adalah jembatan antara massa dan jumlah partikel.',q:[['Mol dari 36 g air (Mr 18)?',['1','2','3','0,5'],1,'mol = massa/Mr = 36/18 = 2.']]},
-'Ekonomi':{s:'Konsep inti: permintaan-penawaran, elastisitas, inflasi, dan kebijakan fiskal-moneter.',q:[['Jika harga naik dan permintaan turun, hukum yang berlaku?',['Hukum Penawaran','Hukum Permintaan','Hukum Gossen','Hukum Say'],1,'Harga naik → jumlah diminta turun = Hukum Permintaan.']]},
-'Literasi B. Inggris':{s:'Konsep inti: main idea, inference, dan vocabulary in context. Baca pertanyaan dulu, lalu pindai teks.',q:[['"Scarce" paling dekat artinya…',['Abundant','Rare','Cheap','Heavy'],1,'Scarce = langka = rare.']]},
-'PU':{s:'Konsep inti: penalaran induktif, deduktif, dan kuantitatif. Cari pola sebelum menghitung.',q:[['Pola 2, 4, 8, 16, … angka berikutnya?',['24','30','32','20'],2,'Setiap suku dikali 2 → 16×2 = 32.']]}};
-const getBank=s=>BANK[s]||{s:'Ringkasan '+s+': pahami konsep inti, hafalkan istilah kunci, lalu latihan soal bertahap dari mudah ke sulit. Tandai topik yang sering muncul di SNBT/TKA.',q:[['Langkah pertama terbaik saat mengerjakan soal '+s+'?',['Menebak cepat','Memahami perintah soal','Melihat opsi terakhir','Melewati semuanya'],1,'Memahami perintah soal mencegah salah tafsir.']]};
-const DEF={role:'student',off:false,tab:'SNBT',subj:'PK',sub:'sum',mf:'all',faq:'siswa',faqOpen:-1,
- mentors:[
- {id:'m1',n:'Kak Dimas Pratama',sp:['PK','PU','Penalaran Matematika','Matematika Lanjut'],mode:'both',city:'Surabaya',price:45000,r:4.8,rc:32,free:2,c:'#2563EB'},
- {id:'m2',n:'Bu Sari Wulandari',sp:['Fisika','Kimia','Biologi'],mode:'online',city:'Malang',price:50000,r:4.9,rc:41,free:0,c:'#10B981'},
- {id:'m3',n:'Kak Rafi Mahendra',sp:['Literasi B. Inggris','PBM','Literasi B. Indonesia'],mode:'both',city:'Jakarta',price:40000,r:4.7,rc:18,free:3,c:'#F59E0B'},
- {id:'m4',n:'Pak Hendra Kusuma',sp:['Ekonomi','Sosiologi','Geografi','Sejarah'],mode:'offline',city:'Surabaya',price:35000,r:4.6,rc:25,free:1,c:'#8B5CF6'},
- {id:'m5',n:'Kak Nadia (Mentor Baru)',sp:['PPU','PBM','PU','PK','Fisika','Ekonomi'],mode:'both',city:'Sidoarjo',price:30000,r:0,rc:0,free:3,c:'#EC4899',demo:1}],
- sessions:[],reviews:[],materials:[],
- T:{reg:false,name:'',email:'',file:'',doc:'none',free:0,bal:0,claimed:false}};
-let S;
-try{S=Object.assign({},DEF,JSON.parse(localStorage.getItem('learnee_v1')||'{}'))}catch(e){S=JSON.parse(JSON.stringify(DEF))}
-S.modal=null;
-const save=()=>{try{const{modal,...x}=S;localStorage.setItem('learnee_v1',JSON.stringify(x))}catch(e){}};
-/* Offline cache: seluruh ringkasan & bank soal di-prefetch ke localStorage */
-try{const c={};[...SN,...TK].forEach(s=>c[s]=getBank(s));localStorage.setItem('learnee_cache',JSON.stringify(c))}catch(e){}
-const isOff=()=>S.off||!navigator.onLine;
-const rp=n=>n?'Rp '+n.toLocaleString('id-ID'):'Rp 0 (Sesi Gratis)';
-const $=s=>document.querySelector(s);
-const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.remove('hidden');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.add('hidden'),2800)};
-const stars=n=>'★'.repeat(Math.round(n))+'☆'.repeat(5-Math.round(n));
-
-/* ---------- Maskot Lee ---------- */
-function lee(v='hero',w=170){
- return `<img src="./assets/maskot-bandeng.png?v=2" width="${w}" alt="Maskot Learnee" class="learnee-mascot mascot-${v}" style="width:${w}px">`;
-}
-
-/* ---------- Navigasi & status ---------- */
-const NAV=[['Beranda','beranda'],['Tentang Kami','tentang'],['Sesi SNBT','sesi','SNBT'],['Sesi TKA','sesi','TKA'],['Fasilitas','fasilitas'],['Testimoni','testimoni'],['FAQ','faq']];
-function chrome(){
- const h=NAV.map(n=>`<a href="#${n[1]}" onclick="${n[2]?`S.tab='${n[2]}';S.subj=${n[2]==='SNBT'?`'PK'`:`'Fisika'`};render()`:'go(\'student\')'}" class="hover:underline" style="color:var(--tx)">${n[0]}</a>`).join('');
- $('#nav1').innerHTML=h;$('#nav2').innerHTML=h;
- const o=isOff(),n=$('#net');
- n.textContent=o?'● Mode Offline':'● Status: Online';
- n.style.cssText=o?'background:#FEF9C3;color:#854D0E':'background:#D1FAE5;color:#047857';
- $('#offBtn').textContent=S.off?'Kembali Online':'Simulasi Offline';
- $('#role').value=S.role;
- $('#offBanner').innerHTML=o?`<div class="bg-amber-100 border-b border-amber-300"><div class="max-w-6xl mx-auto px-4 py-2 flex items-center gap-3 text-amber-900 text-sm">${lee('offline',54)}<p><b>Lee di sini!</b> Kamu sedang offline. Ringkasan Materi & Bank Soal tetap bisa dibuka. Chat, video, upload dokumen, dan klaim fee aktif lagi saat online.</p></div></div>`:'';
- $('#fab').innerHTML=lee('help',48);
-}
-function go(r,sec){S.role=r;S.modal=null;render();if(sec)setTimeout(()=>document.getElementById(sec)?.scrollIntoView(),50);else scrollTo(0,0)}
-function toggleOff(){S.off=!S.off;save();render();if(S.modal&&S.modal.t==='chat')openChat(S.modal.id)}
-window.addEventListener('online',render);window.addEventListener('offline',render);
-function helpLee(){openM(`<div class="card p-6 max-w-sm text-center">${lee('help',110)}<h3 class="font-extrabold text-lg mt-2">Hai, aku Lee!</h3><p class="mu text-sm mt-1">${isOff()?'Kamu offline, tapi materi tersimpan tetap bisa dibaca. Buka tab Sesi lalu pilih Ringkasan atau Bank Soal.':'Butuh bantuan? Pilih mentor di tab Sesi, lalu klaim sesi gratis jika tersedia.'}</p><button class="btn btn-p mt-4" onclick="closeM()">Siap, Lee!</button></div>`)}
-
-/* ---------- Modal ---------- */
-function openM(h,st){S.modal=st||{t:'x'};const m=$('#modal');m.innerHTML=h;m.classList.add('show')}
-function closeM(){S.modal=null;$('#modal').classList.remove('show');$('#modal').innerHTML=''}
-
-/* ---------- Render ---------- */
-function render(){chrome();$('#app').innerHTML=S.role==='teacher'?teacherView():S.role==='admin'?adminView():studentView();save()}
-
-function mentorCard(m,compact){
- const off=isOff();
- return `<div class="card p-4 flex flex-col gap-2"><div class="flex gap-3 items-center"><div class="w-12 h-12 rounded-full text-white font-extrabold flex items-center justify-center shrink-0" style="background:${m.c}">${m.n.replace(/^(Kak|Bu|Pak) /,'')[0]}</div><div class="min-w-0"><div class="font-bold truncate">${m.n}</div><div class="text-xs mu">${m.city} · ${m.mode==='both'?'Online & Offline':m.mode==='online'?'Online':'Offline'}</div></div></div>
- <div class="text-sm" style="color:#CA8A04">${m.rc?stars(m.r)+` <span class="mu">${m.r.toFixed(1)} (${m.rc})</span>`:'<span class="mu">Belum ada rating</span>'}</div>
- <div class="text-xs mu">${m.sp.join(', ')}</div>
- <div class="flex items-center justify-between mt-auto pt-2"><div><div class="font-extrabold text-sm">${rp(m.free>0?0:m.price)}</div>${m.free>0?`<span class="gold">Sesi Gratis Tersedia (${m.free})</span>`:`<span class="text-xs mu">/ sesi 45 menit</span>`}</div>
- <button class="btn btn-p" onclick="openBook('${m.id}')">Konsultasi</button></div></div>`;
-}
-function studentView(){
- const list=S.tab==='SNBT'?SN:TK, bank=getBank(S.subj);
- const ments=S.mentors.filter(m=>m.sp.includes(S.subj)&&(S.mf==='all'||m.mode===S.mf||m.mode==='both'));
- const off=isOff();
- const subTabs=[['sum','Ringkasan Materi'],['soal','Bank Soal'],['vid','Video Tutorial'],['men','Direktori Mentor']].map(t=>`<button class="chip ${S.sub===t[0]?'on':''}" onclick="S.sub='${t[0]}';render()">${t[1]}</button>`).join('');
- let body='';
- if(S.sub==='sum')body=`<div class="card p-5"><div class="flex items-center gap-2 mb-2"><h4 class="font-bold">${S.subj}</h4><span class="gold" style="background:#D1FAE5;color:#047857">Tersimpan offline</span></div><p class="mu leading-relaxed max-w-prose">${bank.s}</p><button class="btn btn-o mt-4" onclick="readM()">Buka mode baca</button>${S.materials.filter(x=>x.subj===S.subj&&x.ok).map(x=>`<div class="mt-4 p-3 rounded-xl border bd"><b>${x.title}</b> <span class="gold">Materi Mentor</span><p class="text-sm mu mt-1">${x.body}</p></div>`).join('')}</div>`;
- if(S.sub==='soal')body=bank.q.map((q,i)=>`<div class="card p-5"><p class="font-semibold mb-3">${i+1}. ${q[0]}</p><div class="grid sm:grid-cols-2 gap-2">${q[1].map((o,j)=>`<button class="btn border bd text-left" onclick="ans(this,${j},${q[2]},${i})">${'ABCD'[j]}. ${o}</button>`).join('')}</div><div id="ex${i}" class="hidden mt-3 p-3 rounded-xl text-sm" style="background:#DBEAFE;color:#1E3A8A"></div></div>`).join('');
- if(S.sub==='vid')body=off?`<div class="card p-6 text-center">${lee('offline',90)}<p class="font-bold mt-2">Video butuh internet</p><p class="mu text-sm">Pemutaran video dinonaktifkan saat offline. Coba Ringkasan atau Bank Soal dulu ya.</p></div>`:`<div class="grid sm:grid-cols-2 gap-3">${['Konsep Inti','Trik Cepat'].map(t=>`<div class="card overflow-hidden"><div class="h-32 flex items-center justify-center" style="background:linear-gradient(135deg,#2563EB,#1E3A8A)"><button class="w-12 h-12 rounded-full" style="background:var(--ay)" onclick="toast('Simulasi video: ${t} ${S.subj}')" aria-label="Putar">▶</button></div><div class="p-3"><b>${t} ${S.subj}</b><div class="text-xs mu">12 menit · Mentor Learnee</div></div></div>`).join('')}</div>`;
- if(S.sub==='men')body=`<div class="flex gap-2 mb-3">${[['all','Semua'],['online','Online'],['offline','Offline']].map(t=>`<button class="chip ${S.mf===t[0]?'on':''}" onclick="S.mf='${t[0]}';render()">${t[1]}</button>`).join('')}</div><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">${ments.map(m=>mentorCard(m)).join('')||'<p class="mu">Belum ada mentor untuk filter ini.</p>'}</div>`;
- const fq={siswa:[['Bagaimana klaim kuota sesi gratis?','Mentor yang masih punya kuota ditandai badge kuning. Saat booking, biaya otomatis Rp 0.'],['Bagaimana booking sesi?','Pilih mentor, pilih Online atau Offline, lalu mulai. Sesi berlangsung 45 menit.'],['Apakah materi bisa dibuka offline?','Ya. Ringkasan Materi dan Bank Soal tersimpan otomatis di perangkatmu.']],guru:[['Dokumen apa yang dibutuhkan?','Ijazah, transkrip, atau sertifikat yang divalidasi Admin.'],['Apa aturan 3 sesi gratis?','Selesaikan 3 sesi gratis dengan rating minimal 4,0 sebelum fee bisa diklaim.'],['Kapan fee bisa dicairkan?','Setelah dokumen terverifikasi, 3 sesi gratis selesai, dan minimal 1 materi diunggah.']]}[S.faq];
- return `
-<section id="beranda" class="grid md:grid-cols-2 gap-6 items-center py-10">
- <div><span class="eyebrow">Belajar bareng Kak Denny di Learnee</span><h1 class="text-4xl md:text-5xl font-extrabold leading-tight mt-4">Belajar di mana aja, tanya mentor kapan aja.</h1>
- <p class="mu mt-4 max-w-lg">Pilih materi belajarmu. Kak Denny akan bantu siapkan materi SNBT & TKA, latihan, dan mentor yang pas buat kamu.</p>
- <div class="flex gap-3 mt-6 flex-wrap"><button class="btn btn-p" onclick="go('student','sesi')">Mulai Belajar Gratis</button></div></div>
- <div class="hero-mascot-wrap flex justify-center"><span class="mascot-note">Hai! Aku Kak Denny.</span>${lee('hero',320)}<span class="mascot-note mascot-note-bottom">✨ Siap belajar?</span></div>
-</section>
-<section id="sesi" class="py-8">
- <div class="study-story"><div class="study-copy"><span class="eyebrow">Persiapan SNBT & TKA, bareng Learnee</span><h2>Gratis. Efektif. Fleksibel.</h2><p>Mulai belajar tanpa biaya. Buka ringkasan dan bank soal, pahami pembahasannya, lalu konsultasi dengan mentor saat butuh bantuan. Materi pilihanmu tetap tersimpan untuk dibuka offline.</p><button class="btn btn-p mt-5" onclick="document.getElementById('materi-hub').scrollIntoView({behavior:'smooth'})">Jelajahi materi</button></div><div class="study-art">${lee('hero',300)}<span class="study-note">Materi · latihan · mentor</span></div></div>
- <div id="materi-hub" class="learning-hub"><div class="learning-hub-head"><div>${lee(S.tab==='SNBT'?'snbt':'tka',68)}</div><div><h3>Sesi ${S.tab}</h3><p>Materi, latihan, video, dan mentor dalam satu tempat.</p></div><div class="hub-switch">${['SNBT','TKA'].map(t=>`<button class="chip ${S.tab===t?'on':''}" onclick="S.tab='${t}';S.subj=${t==='SNBT'?"'PK'":"'Fisika'"};render()">Sesi ${t}</button>`).join('')}</div></div>
- <div class="subject-tabs mt-4">${list.map(s=>`<button class="chip ${S.subj===s?'on':''}" onclick="S.subj='${s}';render()">${s}</button>`).join('')}</div>
- <div class="content-tabs">${subTabs}</div><div class="grid gap-3">${body}</div></div>
-</section>
-<section id="fasilitas" class="py-8"><h2 class="text-2xl font-extrabold mb-4">Mode Belajar & Fasilitas</h2>
- <div class="grid md:grid-cols-2 gap-3"><div class="card p-5"><b>Konsultasi Online</b><p class="mu text-sm mt-1">Ruang chat 45 menit, unggah foto soal, dan tautan video call.</p></div><div class="card p-5"><b>Konsultasi Offline</b><p class="mu text-sm mt-1">Pilih kota mentor dan titik temu ruang belajar.</p></div></div>
- <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-3">${[['Konsultasi Privat Per Sesi','Satu mentor, satu siswa, fokus pada soalmu.'],['Mentor Terverifikasi Ijazah','Dokumen dicek Admin sebelum mengajar.'],['Sesi Gratis untuk Siswa','Coba dulu bersama mentor baru, tanpa biaya.'],['Akses Belajar Tanpa Internet','Materi tersimpan dan terbuka saat offline.']].map(f=>`<div class="card p-4"><div class="w-8 h-1.5 rounded mb-3" style="background:var(--ay)"></div><b class="text-sm">${f[0]}</b><p class="mu text-xs mt-1">${f[1]}</p></div>`).join('')}</div></section>
-<section id="tentang" class="py-8"><h2 class="text-2xl font-extrabold">Tentang Kami</h2><p class="mu mt-2 max-w-2xl">Visi Learnee: pemerataan akses persiapan PTN di seluruh Indonesia, dari kota besar sampai daerah dengan sinyal terbatas.</p>
- <ol class="grid sm:grid-cols-4 gap-3 mt-4">${['Daftar & Upload Ijazah','Verifikasi Admin','3x Sesi Gratis & Upload Materi','Klaim Fee'].map((s,i)=>`<li class="card p-4"><span class="gold">Tahap ${i+1}</span><p class="font-bold text-sm mt-2">${s}</p></li>`).join('')}</ol></section>
-<section id="testimoni" class="py-8"><h2 class="text-2xl font-extrabold mb-4">Apa Kata Mereka</h2><div class="grid md:grid-cols-3 gap-3">
- ${[['Aisyah R.','SMAN 5 Surabaya','Kedokteran UNAIR',5,'Sesi gratisnya bikin berani mulai. Penjelasan Kak Dimas runtut.'],['Bagas P.','SMKN 2 Malang','Teknik Informatika ITS',5,'Materinya tetap bisa dibuka waktu sinyal hilang. Sangat membantu.'],['Citra L.','MAN 1 Sidoarjo','Akuntansi UB',4,'Mentor offline-nya ramah, titik temunya mudah dijangkau.']].concat(S.reviews.slice(-3).map(r=>[r.by,'Pengguna Learnee','Pejuang PTN',r.s,r.t||'Sesi yang membantu.'])).map(t=>`<div class="card p-4"><div style="color:#CA8A04">${stars(t[3])}</div><p class="text-sm mt-2">“${t[4]}”</p><p class="font-bold text-sm mt-3">${t[0]}</p><p class="text-xs mu">${t[1]} · ${t[2]}</p></div>`).join('')}</div></section>
-<section id="faq" class="py-8"><h2 class="text-2xl font-extrabold mb-3">Tanya Jawab</h2><div class="flex gap-2 mb-3">${[['siswa','Kategori Siswa'],['guru','Kategori Guru/Mentor']].map(t=>`<button class="chip ${S.faq===t[0]?'on':''}" onclick="S.faq='${t[0]}';S.faqOpen=-1;render()">${t[1]}</button>`).join('')}</div>
- <div class="grid gap-2 max-w-3xl">${fq.map((f,i)=>`<div class="card"><button class="w-full text-left p-4 font-semibold flex justify-between" aria-expanded="${S.faqOpen===i}" onclick="S.faqOpen=S.faqOpen===${i}?-1:${i};render()">${f[0]}<span>${S.faqOpen===i?'−':'+'}</span></button>${S.faqOpen===i?`<p class="px-4 pb-4 mu text-sm">${f[1]}</p>`:''}</div>`).join('')}</div></section>
-<footer class="border-t bd pt-8 mt-8 grid md:grid-cols-3 gap-6 text-sm"><div><b class="text-lg" style="color:var(--pb)">Learnee</b><p class="mu mt-1">Belajar bebas batas, tembus PTN impian.</p></div><div><b>Navigasi</b><p class="mu mt-1">Beranda · Sesi SNBT · Sesi TKA · FAQ</p></div><div><b>Kontak</b><p class="mu mt-1">bantuan@learnee.id · @learnee.id</p></div>
-<p class="md:col-span-3 mu text-xs">Proyek lomba Web Development bertema pendidikan.</p>
-<details class="md:col-span-3 text-xs mu"><summary class="cursor-pointer font-bold">Kode sw.js (Service Worker)</summary><pre class="overflow-x-auto p-3 card mt-2">const C='learnee-v2';
-self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(['./','./index.html','./assets/maskot-bandeng.png?v=2']))));
-self.addEventListener('fetch',e=>e.respondWith(fetch(e.request).then(r=>{const k=r.clone();caches.open(C).then(c=>c.put(e.request,k));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html')))));</pre></details></footer>`;
-}
-function ans(b,j,c,i){const ex=$('#ex'+i);ex.classList.remove('hidden');const ok=j===c;b.style.background=ok?'#D1FAE5':'#FEE2E2';b.style.color='#0F172A';ex.innerHTML=(ok?'<b>Benar!</b> ':'<b>Belum tepat.</b> ')+'Pembahasan: '+getBank(S.subj).q[i][3]}
-function readM(){openM(`<div class="card p-6 max-w-lg w-full">${lee(S.tab==='SNBT'?'snbt':'tka',80)}<h3 class="font-extrabold text-lg">Ringkasan ${S.subj}</h3><p class="mu mt-2 leading-relaxed">${getBank(S.subj).s}</p><button class="btn btn-p mt-4" onclick="closeM()">Tutup</button></div>`)}
-
-/* ---------- Konsultasi ---------- */
-function openBook(id){
- const m=S.mentors.find(x=>x.id===id);
- openM(`<div class="card p-6 max-w-md w-full"><h3 class="font-extrabold text-lg">Konsultasi dengan ${m.n}</h3>
- <p class="text-sm mu">Biaya: <b style="color:var(--tx)">${rp(m.free>0?0:m.price)}</b></p>
- <div class="flex gap-2 mt-4">${['online','offline'].filter(x=>m.mode==='both'||m.mode===x).map((x,i)=>`<label class="chip flex-1 text-center"><input type="radio" name="md" value="${x}" ${i===0?'checked':''} onchange="$('#locw').style.display=this.value==='offline'?'block':'none'"> ${x==='online'?'Online':'Offline'}</label>`).join('')}</div>
- <div id="locw" class="mt-3" style="display:${m.mode==='offline'?'block':'none'}"><label class="text-xs mu">Titik temu di ${m.city}</label><input id="loc" class="inp" placeholder="Contoh: Perpustakaan Daerah"></div>
- <div class="flex gap-2 mt-5"><button class="btn btn-p flex-1" onclick="startS('${m.id}')">Mulai Sesi</button><button class="btn border bd" onclick="closeM()">Batal</button></div></div>`,{t:'book'});
- if(m.mode==='offline')$('#locw').style.display='block';
-}
-function startS(mid){
- const m=S.mentors.find(x=>x.id===mid),md=(document.querySelector('input[name=md]:checked')||{}).value||m.mode;
- const loc=md==='offline'?($('#loc').value.trim()):'';
- if(md==='offline'&&!loc)return toast('Isi titik temu terlebih dahulu.');
- const s={id:'s'+Date.now(),mid,md,loc,free:m.free>0,msgs:[{f:'m',t:'Halo! Silakan ceritakan soal atau materi yang ingin dibahas.'}],st:'active'};
- S.sessions.push(s);save();openChat(s.id);
-}
-function openChat(id){
- const s=S.sessions.find(x=>x.id===id),m=S.mentors.find(x=>x.id===s.mid),off=isOff();
- openM(`<div class="card w-full max-w-lg flex flex-col" style="height:min(88vh,640px)"><div class="p-4 border-b bd flex items-center gap-3"><div class="flex-1 min-w-0"><b class="block truncate">${m.n}</b><span class="text-xs mu">${s.md==='online'?'Online · <a class="underline" style="color:var(--pb)" href="#" onclick="event.preventDefault();toast(\'Simulasi: tautan video call dibuka\')">Tautan video call</a>':'Offline · '+s.loc} · ${s.free?'Rp 0 (Sesi Gratis)':rp(m.price)}</span></div><button class="btn btn-p" onclick="openRate('${id}')">Akhiri Sesi</button></div>
- <div id="msgs" class="flex-1 overflow-y-auto p-4 grid gap-2 content-start"></div>
- <div class="p-3 border-t bd">${off?'<p class="text-xs text-amber-700 mb-2">Kamu offline: kirim pesan baru dinonaktifkan sementara. Pesan lama tetap terbaca.</p>':''}<div class="flex gap-2"><label class="btn border bd ${off?'opacity-50':''}" title="Unggah foto soal">📎<input type="file" accept="image/*" class="hidden" ${off?'disabled':''} onchange="sendImg('${id}',this)"></label><input id="cin" class="inp" placeholder="Tulis pesan…" ${off?'disabled':''} onkeydown="if(event.key==='Enter')sendMsg('${id}')"><button class="btn btn-p" ${off?'disabled':''} onclick="sendMsg('${id}')">Kirim</button></div></div></div>`,{t:'chat',id});
- drawMsgs(s);
-}
-function drawMsgs(s){const b=$('#msgs');if(!b)return;b.innerHTML=s.msgs.map(m=>`<div class="max-w-[80%] p-3 rounded-2xl text-sm ${m.f==='u'?'justify-self-end text-white':'border bd'}" style="${m.f==='u'?'background:var(--pb)':'background:var(--bg)'}">${m.img?`<img src="${m.img}" alt="Foto soal" class="rounded-lg max-h-48">`:m.t.replace(/</g,'&lt;')}</div>`).join('');b.scrollTop=b.scrollHeight}
-const REP=['Oke, coba tuliskan langkah yang sudah kamu kerjakan.','Bagus! Fokus dulu pada konsep dasarnya, lalu kita hitung bersama.','Kuncinya ada di pola soalnya. Coba identifikasi yang diketahui dan ditanya.'];
-function sendMsg(id){if(isOff())return toast('Kamu sedang offline. Pesan baru tidak bisa dikirim.');const i=$('#cin'),t=i.value.trim();if(!t)return;const s=S.sessions.find(x=>x.id===id);s.msgs.push({f:'u',t});i.value='';drawMsgs(s);save();setTimeout(()=>{s.msgs.push({f:'m',t:REP[s.msgs.length%3]});drawMsgs(s);save()},900)}
-function sendImg(id,inp){if(isOff())return;const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const s=S.sessions.find(x=>x.id===id);s.msgs.push({f:'u',t:'[foto]',img:r.result});drawMsgs(s);setTimeout(()=>{s.msgs.push({f:'m',t:'Fotonya sudah kuterima. Kita bahas bareng ya!'});drawMsgs(s)},900)};r.readAsDataURL(f)}
-let rate=0;
-function openRate(id){
- rate=0;openM(`<div class="card p-6 max-w-sm w-full text-center"><h3 class="font-extrabold text-lg">Bagaimana sesimu?</h3><div class="text-3xl my-3" id="st">${[1,2,3,4,5].map(n=>`<button aria-label="${n} bintang" onclick="setR(${n})" style="color:#CBD5E1">★</button>`).join('')}</div><textarea id="rv" class="inp" rows="3" placeholder="Tulis ulasan singkat…"></textarea><button class="btn btn-p w-full mt-4" onclick="submitR('${id}')">Kirim Ulasan</button></div>`,{t:'rate',id});
-}
-function setR(n){rate=n;[...$('#st').children].forEach((b,i)=>b.style.color=i<n?'#FACC15':'#CBD5E1')}
-function submitR(id){
- if(!rate)return toast('Pilih rating 1–5 bintang dulu.');
- const s=S.sessions.find(x=>x.id===id),m=S.mentors.find(x=>x.id===s.mid);
- s.st='done';m.r=(m.r*m.rc+rate)/(m.rc+1);m.rc++;
- S.reviews.push({mid:m.id,s:rate,t:$('#rv').value.trim(),by:'Kamu (Siswa)'});
- if(s.free){m.free=Math.max(0,m.free-1);if(m.demo&&rate>=4)S.T.free=Math.min(3,S.T.free+1)}
- closeM();render();toast('Terima kasih! Rating dan progres sesi gratis mentor diperbarui.');
-}
-
-/* ---------- Guru ---------- */
-function progress(){const T=S.T,mats=S.materials.length;return{p:[T.doc==='verified',T.free>=3,mats>=1],pct:Math.round(((T.doc==='verified'?1:0)+Math.min(T.free,3)/3+Math.min(mats,1))/3*100),mats}}
-function teacherView(){
- const T=S.T,off=isOff(),g=progress();
- if(!T.reg)return `<section class="py-10 max-w-xl"><div class="flex items-center gap-4">${lee('hero',100)}<div><h2 class="text-2xl font-extrabold">Gabung Jadi Mentor</h2><p class="mu text-sm">Daftar dan unggah dokumen akademikmu untuk diverifikasi Admin.</p></div></div>
- <div class="card p-5 mt-4 grid gap-3"><input id="tn" class="inp" placeholder="Nama lengkap"><input id="te" class="inp" type="email" placeholder="Email"><div><input id="tf" type="file" class="inp" ${off?'disabled':''}>${off?'<p class="text-xs text-amber-700 mt-1">Unggah dokumen dinonaktifkan saat offline.</p>':''}</div><button class="btn btn-p" ${off?'disabled':''} onclick="regT()">Daftar & Kirim Dokumen</button></div></section>`;
- const row=(ok,t,sub)=>`<div class="flex gap-3 items-start p-3 rounded-xl border bd"><div class="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs shrink-0" style="background:${ok?'var(--gr)':'var(--bd)'}">${ok?'✓':''}</div><div><b class="text-sm">${t}</b><p class="text-xs mu">${sub}</p></div></div>`;
- const done=g.pct===100;
- return `<section class="py-8"><div class="flex items-center gap-4 flex-wrap">${lee(done?'trophy':'hero',110)}<div><h2 class="text-2xl font-extrabold">Dashboard Mentor</h2><p class="mu text-sm">${T.name} · ${done?'<span class="gold">Verified Mentor</span>':'Mentor dalam proses'}</p></div></div>
- ${done?`<div class="card p-4 mt-4" style="background:#FEF9C3;color:#713F12"><b>Selamat dari Lee! 🎉</b> Semua syarat terpenuhi. Fee kamu sudah bisa diklaim.</div>`:''}
- <div class="card p-5 mt-4"><div class="flex justify-between text-sm font-bold mb-2"><span>Progress Unlock Fee</span><span>${g.pct}%</span></div><div class="bar"><i style="width:${g.pct}%"></i></div>
- <div class="grid gap-2 mt-4">${row(T.doc==='verified','Dokumen Akademik Terverifikasi',T.doc==='verified'?'Verified':T.doc==='rejected'?'Ditolak Admin — unggah ulang':'Pending (menunggu Admin)')}${row(T.free>=3,'3 Sesi Gratis, rating ≥ 4,0',T.free+'/3 selesai · uji lewat role Siswa dengan mentor "Kak Nadia (Mentor Baru)"')}${row(g.mats>=1,'Unggah minimal 1 Materi/Bank Soal',Math.min(g.mats,1)+'/1')}</div>
- <div class="flex items-center gap-3 mt-4 flex-wrap"><button class="btn btn-p" ${(!done||off||T.claimed)?'disabled':''} onclick="claim()">${T.claimed?'Fee Sudah Diklaim':'Klaim / Tarik Fee'}</button><span class="text-sm mu">Saldo: <b style="color:var(--tx)">${rp(T.bal)||'Rp 0'}</b></span>${off?'<span class="text-xs text-amber-700">Klaim fee tidak tersedia saat offline.</span>':!done?'<span class="text-xs mu">Terkunci sampai 100%.</span>':''}</div>
- ${T.doc==='rejected'?`<button class="btn btn-o mt-3" onclick="S.T.reg=false;render()">Unggah ulang dokumen</button>`:''}</div>
- <div class="card p-5 mt-4"><h3 class="font-bold mb-3">Unggah Materi / Bank Soal</h3><div class="grid gap-2"><input id="mt" class="inp" placeholder="Judul paket"><select id="ms" class="inp">${[...SN,...TK].map(s=>`<option>${s}</option>`).join('')}</select><textarea id="mb" class="inp" rows="3" placeholder="Ringkasan atau isi soal"></textarea><button class="btn btn-p" onclick="addMat()">Unggah</button></div>
- ${S.materials.map(x=>`<p class="text-sm mt-3">• <b>${x.title}</b> (${x.subj}) — ${x.ok?'<span style="color:var(--gr)">Tayang</span>':'<span class="mu">Menunggu moderasi Admin</span>'}</p>`).join('')}</div></section>`;
-}
-function regT(){const n=$('#tn').value.trim(),e=$('#te').value.trim(),f=$('#tf').files[0];if(!n||!e||!f)return toast('Lengkapi nama, email, dan file dokumen.');Object.assign(S.T,{reg:true,name:n,email:e,file:f.name,doc:'pending'});render();toast('Dokumen terkirim. Minta Admin memvalidasi lewat Switch Role.')}
-function addMat(){const t=$('#mt').value.trim(),b=$('#mb').value.trim();if(!t||!b)return toast('Isi judul dan konten.');S.materials.push({title:t,subj:$('#ms').value,body:b,ok:false});render();toast('Materi diunggah, menunggu moderasi Admin.')}
-function claim(){if(isOff())return toast('Klaim fee butuh koneksi internet.');S.T.bal=150000;S.T.claimed=true;render();toast('Fee berhasil diklaim. Badge Verified Mentor aktif!')}
-
-/* ---------- Admin ---------- */
-function adminView(){
- const T=S.T;
- return `<section class="py-8"><h2 class="text-2xl font-extrabold">Panel Admin</h2>
- <div class="card p-5 mt-4"><h3 class="font-bold mb-3">Validasi Dokumen Calon Guru</h3>${T.reg&&T.doc==='pending'?`<div class="flex items-center gap-3 flex-wrap"><div class="flex-1"><b>${T.name}</b><p class="text-xs mu">${T.email} · ${T.file}</p></div><button class="btn btn-p" onclick="S.T.doc='verified';render();toast('Dokumen disetujui')">Approve</button><button class="btn border bd" style="color:#DC2626" onclick="S.T.doc='rejected';render();toast('Dokumen ditolak')">Reject</button></div>`:'<p class="mu text-sm">Tidak ada dokumen yang menunggu. Daftarkan guru lewat role Guru terlebih dahulu.</p>'}</div>
- <div class="card p-5 mt-4"><h3 class="font-bold mb-3">Moderasi Materi & Soal</h3>${S.materials.filter(x=>!x.ok).map((x,i)=>`<div class="flex items-center gap-3 py-2"><div class="flex-1"><b>${x.title}</b><p class="text-xs mu">${x.subj}</p></div><button class="btn btn-p" onclick="S.materials[${S.materials.indexOf(x)}].ok=true;render();toast('Materi tayang')">Setujui</button></div>`).join('')||'<p class="mu text-sm">Antrean moderasi kosong.</p>'}</div></section>`;
-}
-document.documentElement.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.modal&&S.modal.t!=='rate')closeM()});
-try{navigator.serviceWorker&&navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}
-render();
-</script>
+<!-- Application logic -->
+<script src="./script.js"></script>
 </body>
 </html>
