@@ -25,7 +25,9 @@ S.mentors=S.mentors.map(m=>({...m,price:20000}));
 const save=()=>{try{const{modal,...x}=S;localStorage.setItem('learnee_v1',JSON.stringify(x))}catch(e){}};
 /* Offline cache: seluruh ringkasan & bank soal di-prefetch ke localStorage */
 try{const c={};[...SN,...TK].forEach(s=>c[s]=getBank(s));localStorage.setItem('learnee_cache',JSON.stringify(c))}catch(e){}
-const isOff=()=>S.off||!navigator.onLine;
+const IS_ADMIN_PAGE=location.pathname.toLowerCase().endsWith('/admin.html');
+S.role=IS_ADMIN_PAGE?'admin':'student';
+const isOff=()=>!navigator.onLine;
 const rp=n=>n?'Rp '+n.toLocaleString('id-ID'):'Rp 0 (Sesi Gratis)';
 const $=s=>document.querySelector(s);
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.remove('hidden');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.add('hidden'),2800)};
@@ -41,12 +43,12 @@ function lee(v='hero',w=170){
 const NAV=[['Beranda','beranda'],['Sesi TKA','sesi','TKA'],['Sesi SNBT','sesi','SNBT'],['Mentoring','sesi','SNBT','men']];
 function handleNav(item){if(!item[2]){S.page='home';go('student');return}if(item[2]==='SNBT'&&!item[3]){S.role='student';S.page='snbt';S.snbtFeatureOpen=-1;render();scrollTo(0,0);return}if(item[2]==='TKA'&&!item[3]){S.role='student';S.page='home';S.tab='TKA';S.subj='Fisika';S.sub='sum';S.programOpen=false;render();requestAnimationFrame(()=>document.getElementById('programs')?.scrollIntoView({behavior:'smooth',block:'start'}));return}if(item[3]==='men'){S.role='student';S.page='mentoring';S.mentorSubject='Semua';S.mentorSearch='';render();scrollTo(0,0);return}openLearningHub(item[2],item[3]||'sum')}
 function chrome(){
+ if(IS_ADMIN_PAGE){const n=$('#net');if(n){const o=isOff();n.textContent=o?'\u25CF Mode Offline':'\u25CF Status: Online';n.classList.toggle('is-offline',o);n.classList.toggle('is-online',!o)}return}
  const h=NAV.map(n=>`<a href="#${n[1]}" onclick='handleNav(${JSON.stringify(n)})' class="nav-link hover:underline">${n[0]}</a>`).join('');
  $('#nav1').innerHTML=h;$('#nav2').innerHTML=h;
  const o=isOff(),n=$('#net');
  n.textContent=o?'● Mode Offline':'● Status: Online';
  n.classList.toggle('is-offline',o);n.classList.toggle('is-online',!o);
- $('#offBtn').textContent=S.off?'Kembali Online':'Simulasi Offline';
  $('#role').value=S.role;
  $('#fab').innerHTML=lee('help',48);
 }
@@ -84,7 +86,6 @@ function startTestimonialAutoplay(){
   if(loopWidth&&track.scrollLeft>=loopWidth)track.scrollLeft-=loopWidth;
  },20);
 }
-function toggleOff(){S.off=!S.off;save();render();if(S.modal&&S.modal.t==='chat')openChat(S.modal.id)}
 window.addEventListener('online',render);window.addEventListener('offline',render);
 function helpLee(){openM(`<div class="card p-6 max-w-sm text-center">${lee('help',110)}<h3 class="font-extrabold text-lg mt-2">Hai, aku Lee!</h3><p class="mu text-sm mt-1">${isOff()?'Kamu offline, tapi materi tersimpan tetap bisa dibaca. Buka tab Sesi lalu pilih Ringkasan atau Bank Soal.':'Butuh bantuan? Pilih mentor di tab Sesi, lalu klaim sesi gratis jika tersedia.'}</p><button class="btn btn-p mt-4" onclick="closeM()">Siap, Lee!</button></div>`)}
 
@@ -96,7 +97,7 @@ function footerView(){
   return `<footer class="site-footer"><svg class="site-footer-wave" viewBox="0 0 1440 130" preserveAspectRatio="none" aria-hidden="true"><path d="M0 65 C170 12 335 20 520 48 C750 82 900 116 1110 85 C1240 66 1340 55 1440 40 L1440 130 L0 130 Z"/></svg><div class="site-footer-inner"><div class="site-footer-brand"><a class="site-footer-logo" href="#beranda" onclick="go('student')"><img src="./assets/maskot-bandeng.png?v=2" alt=""><span>Learnee</span></a><p>Belajar bebas batas, tembus PTN impian. Materi gratis yang tetap bisa dibuka saat sinyal hilang.</p><div class="site-footer-pills"><button onclick="handleNav(['Sesi SNBT','sesi','SNBT'])">Persiapan SNBT</button><button onclick="handleNav(['Sesi TKA','sesi','TKA'])">Persiapan TKA</button><button onclick="openMentoringPage()">Konsultasi Mentor</button></div><div class="site-footer-contact"><a href="mailto:bantuan@learnee.id"><span aria-hidden="true">&#9993;</span>bantuan@learnee.id</a><a href="https://instagram.com/learnee.id" target="_blank" rel="noreferrer"><span aria-hidden="true">&#9673;</span>@learnee.id</a></div></div><nav class="site-footer-links" aria-label="Navigasi footer"><div class="site-footer-group"><h3>Belajar</h3><a href="#sesi" onclick="handleNav(['Sesi SNBT','sesi','SNBT'])">Materi SNBT</a><a href="#sesi" onclick="handleNav(['Sesi TKA','sesi','TKA'])">Persiapan TKA</a><a href="#fasilitas" onclick="openMentoringPage()">Konsultasi Mentor</a><a href="#fasilitas" onclick="go('student','fasilitas')">Belajar Offline</a></div><div class="site-footer-group"><h3>Learnee</h3><a href="#beranda" onclick="go('student')">Beranda</a><a href="#tentang" onclick="go('student','tentang')">Tentang Kami</a><a href="#testimoni" onclick="go('student','testimoni')">Testimoni</a><a href="#faq" onclick="go('student','faq')">FAQ</a></div><div class="site-footer-group"><h3>Bantuan &amp; Panduan</h3><a href="mailto:bantuan@learnee.id">Pusat Bantuan</a><a href="mailto:bantuan@learnee.id">Hubungi Kami</a><a href="#faq" onclick="go('student','faq')">Pertanyaan Umum</a></div></nav></div><div class="site-footer-bottom"><span>&copy; ${new Date().getFullYear()} Learnee. Belajar untuk masa depan.</span><div><a href="#tentang" onclick="go('student','tentang')">Privasi</a><a href="#tentang" onclick="go('student','tentang')">Syarat &amp; Ketentuan</a></div></div></footer>`;
 }
 /* ---------- Render ---------- */
-function render(){chrome();$('#app').classList.toggle('is-mentoring-page',S.page==='mentoring');const pageView=S.role==='teacher'?teacherView():S.role==='admin'?adminView():S.page==='mentoring'?snbtMentorSection():S.page==='snbt'?snbtLandingView():studentView();$('#app').innerHTML=pageView+footerView();const fill=$('#feeProgress');if(fill)fill.style.width=`${progress().pct}%`;startTestimonialAutoplay();save()}
+function render(){chrome();$('#app').classList.toggle('is-mentoring-page',S.page==='mentoring');const pageView=S.role==='teacher'?teacherView():S.role==='admin'?adminView():S.page==='mentoring'?snbtMentorSection():S.page==='snbt'?snbtLandingView():studentView();$('#app').innerHTML=pageView+(IS_ADMIN_PAGE?'':footerView());const fill=$('#feeProgress');if(fill)fill.style.width=`${progress().pct}%`;startTestimonialAutoplay();save()}
 
 function mentorIntroFree(m){return Boolean(m.demo)&&m.r<4}
 function mentorCostsFree(m){return mentorIntroFree(m)||m.free>0}
@@ -280,10 +281,9 @@ function adminView(){
 function reviewMat(i,approve){const m=S.materials[i];m.note=$('#mn'+i)?.value.trim()||'';m.ok=approve;m.rejected=!approve;save();render();toast(approve?'Materi disetujui dan tayang':'Catatan revisi dikirim ke guru')}
 function adminRejectTeacher(){S.T.doc='rejected';save();render();toast('Pengajuan ditandai perlu perbaikan')}document.documentElement.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.modal&&S.modal.t!=='rate')closeM()});
 /* Static page controls */
-document.querySelector('[data-action="home"]').addEventListener('click',()=>go('student'));
-document.querySelector('[data-action="start-learning"]').addEventListener('click',()=>go('student','sesi'));
-$('#offBtn').addEventListener('click',toggleOff);
-$('#role').addEventListener('change',e=>go(e.currentTarget.value));
+document.querySelector('[data-action="home"]')?.addEventListener('click',()=>go('student'));
+document.querySelector('[data-action="start-learning"]')?.addEventListener('click',()=>go('student','sesi'));
+$('#role')?.addEventListener('change',e=>go(e.currentTarget.value));
 $('#modal').addEventListener('click',e=>{if(e.target.id==='modal'&&S.modal&&S.modal.t!=='rate')closeM()});
 $('#fab').addEventListener('click',helpLee);
 try{navigator.serviceWorker&&navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}
