@@ -35,8 +35,31 @@
 <div id="toast" class="fixed left-1/2 -translate-x-1/2 bottom-6 z-[70] hidden px-4 py-2 rounded-xl text-sm font-bold text-white" role="status" aria-live="polite"></div>
 
 <!-- Application logic -->
+<script src="./js/supabase-config.js"></script>
+<script src="./js/supabase-api.js"></script>
 <script src="./content-bank.js"></script>
 <script src="./question-engine.js"></script>
 <script src="./script.js"></script>
+<script type="module">
+  try {
+    const [{ auth }, { onAuthStateChanged }] = await Promise.all([
+      import("./js/firebase-config.js"),
+      import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js")
+    ]);
+    let resolveInitialAuth;
+    const initialAuth = new Promise(resolve => { resolveInitialAuth = resolve; });
+    onAuthStateChanged(auth, user => {
+      window.learneeFirebaseUser = user;
+      resolveInitialAuth(user);
+      window.dispatchEvent(new Event("learnee-auth-ready"));
+    });
+    window.learneeFirebaseIdentity = async () => {
+      const user = auth.currentUser || await initialAuth;
+      return user ? { uid: user.uid, email: user.email, token: await user.getIdToken() } : null;
+    };
+  } catch (error) {
+    console.error("Firebase session could not be initialized:", error);
+  }
+</script>
 </body>
 </html>

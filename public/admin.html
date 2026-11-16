@@ -29,6 +29,7 @@
 <div id="toast" class="fixed left-1/2 -translate-x-1/2 bottom-6 z-[70] hidden px-4 py-2 rounded-xl text-sm font-bold text-white" role="status" aria-live="polite"></div>
 
 <script>document.documentElement.classList.add("cek-login");</script>
+<script src="./js/supabase-config.js"></script>
 <script type="module">
   import { auth } from "./js/firebase-config.js";
   import { onAuthStateChanged, signOut }
@@ -49,8 +50,15 @@
     document.getElementById("emailAdmin").textContent = user.email;
     document.getElementById("btnLogout").onclick = () =>
       signOut(auth).then(() => location.replace("login.html"));
+    window.learneeFirebaseUser = user;
+    window.learneeFirebaseIdentity = async () => ({
+      uid: user.uid,
+      email: user.email,
+      token: await user.getIdToken()
+    });
 
     // muat script aplikasi berurutan, hanya setelah login terverifikasi
+    await muatScript("./js/supabase-api.js");
     await muatScript("./content-bank.js");
     await muatScript("./question-engine.js");
     await muatScript("./script.js");
