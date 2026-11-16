@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="utf-8">
@@ -8,19 +8,53 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <link rel="stylesheet" href="./style.css">
+<style>html.cek-login body{visibility:hidden}</style>
 </head>
 <body>
 <header class="sticky top-0 z-50 sf border-b bd">
   <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
     <a href="./index.html" class="brand-link flex items-center gap-2 font-extrabold text-xl"><img src="./assets/maskot-bandeng.png?v=2" alt="" class="brand-mascot">Learnee <span class="text-sm mu">Admin Workspace</span></a>
-    <div class="flex items-center gap-2"><span id="net" class="text-xs font-bold px-3 py-1 rounded-full"></span><a class="btn bd border text-xs" href="./index.html">Kembali ke situs</a></div>
+    <div class="flex items-center gap-2">
+      <span id="net" class="text-xs font-bold px-3 py-1 rounded-full"></span>
+      <span id="emailAdmin" class="text-xs mu hidden sm:inline"></span>
+      <a class="btn bd border text-xs" href="./index.html">Kembali ke situs</a>
+      <button id="btnLogout" type="button" class="btn bd border text-xs">Logout</button>
+    </div>
   </div>
 </header>
 <main id="app" class="max-w-6xl mx-auto px-4 pb-24"></main>
 <div id="modal"></div>
 <div id="toast" class="fixed left-1/2 -translate-x-1/2 bottom-6 z-[70] hidden px-4 py-2 rounded-xl text-sm font-bold text-white" role="status" aria-live="polite"></div>
-<script src="./content-bank.js"></script>
-<script src="./question-engine.js"></script>
-<script src="./script.js"></script>
+
+<script>document.documentElement.classList.add("cek-login");</script>
+<script type="module">
+  import { auth } from "./js/firebase-config.js";
+  import { onAuthStateChanged, signOut }
+    from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+  function muatScript(src) {
+    return new Promise((ok, gagal) => {
+      const s = document.createElement("script");
+      s.src = src; s.async = false;
+      s.onload = ok; s.onerror = gagal;
+      document.body.appendChild(s);
+    });
+  }
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) { location.replace("login.html"); return; }
+
+    document.getElementById("emailAdmin").textContent = user.email;
+    document.getElementById("btnLogout").onclick = () =>
+      signOut(auth).then(() => location.replace("login.html"));
+
+    // muat script aplikasi berurutan, hanya setelah login terverifikasi
+    await muatScript("./content-bank.js");
+    await muatScript("./question-engine.js");
+    await muatScript("./script.js");
+
+    document.documentElement.classList.remove("cek-login");
+  });
+</script>
 </body>
 </html>
