@@ -9,7 +9,7 @@ const BANK={
 'Literasi B. Inggris':{s:'Konsep inti: main idea, inference, dan vocabulary in context. Baca pertanyaan dulu, lalu pindai teks.',q:[['"Scarce" paling dekat artinya…',['Abundant','Rare','Cheap','Heavy'],1,'Scarce = langka = rare.']]},
 'PU':{s:'Konsep inti: penalaran induktif, deduktif, dan kuantitatif. Cari pola sebelum menghitung.',q:[['Pola 2, 4, 8, 16, … angka berikutnya?',['24','30','32','20'],2,'Setiap suku dikali 2 → 16×2 = 32.']]}};
 const getBank=s=>BANK[s]||{s:'Ringkasan '+s+': pahami konsep inti, hafalkan istilah kunci, lalu latihan soal bertahap dari mudah ke sulit. Tandai topik yang sering muncul di SNBT/TKA.',q:[['Langkah pertama terbaik saat mengerjakan soal '+s+'?',['Menebak cepat','Memahami perintah soal','Melihat opsi terakhir','Melewati semuanya'],1,'Memahami perintah soal mencegah salah tafsir.']]};
-const DEF={role:'student',page:'home',off:false,tab:'SNBT',subj:'PK',sub:'sum',programOpen:false,mf:'all',faq:'siswa',faqOpen:-1,
+const DEF={role:'student',page:'home',off:false,tab:'SNBT',subj:'PK',sub:'sum',programOpen:false,mf:'all',faq:'siswa',faqOpen:-1,snbtFeatureOpen:-1,
  mentors:[
  {id:'m1',n:'Kak Dimas Pratama',sp:['PK','PU','Penalaran Matematika','Matematika Lanjut'],mode:'both',city:'Surabaya',price:45000,r:4.8,rc:32,free:2,c:'#2563EB'},
  {id:'m2',n:'Bu Sari Wulandari',sp:['Fisika','Kimia','Biologi'],mode:'online',city:'Malang',price:50000,r:4.9,rc:41,free:0,c:'#10B981'},
@@ -38,7 +38,7 @@ function lee(v='hero',w=170){
 
 /* ---------- Navigasi & status ---------- */
 const NAV=[['Beranda','beranda'],['Sesi TKA','sesi','TKA'],['Sesi SNBT','sesi','SNBT'],['Mentoring','sesi','SNBT','men']];
-function handleNav(item){if(!item[2]){S.page='home';go('student');return}if(item[2]==='SNBT'&&!item[3]){S.role='student';S.page='snbt';render();scrollTo(0,0);return}if(item[2]==='TKA'&&!item[3]){S.role='student';S.page='home';S.tab='TKA';S.subj='Fisika';S.sub='sum';S.programOpen=false;render();requestAnimationFrame(()=>document.getElementById('programs')?.scrollIntoView({behavior:'smooth',block:'start'}));return}openLearningHub(item[2],item[3]||'sum')}
+function handleNav(item){if(!item[2]){S.page='home';go('student');return}if(item[2]==='SNBT'&&!item[3]){S.role='student';S.page='snbt';render();scrollTo(0,0);return}if(item[2]==='TKA'&&!item[3]){S.role='student';S.page='home';S.tab='TKA';S.subj='Fisika';S.sub='sum';S.programOpen=false;render();requestAnimationFrame(()=>document.getElementById('programs')?.scrollIntoView({behavior:'smooth',block:'start'}));return}if(item[3]==='men'){S.role='student';S.page='home';S.programOpen=false;render();requestAnimationFrame(()=>document.getElementById('fasilitas')?.scrollIntoView({behavior:'smooth',block:'start'}));return}openLearningHub(item[2],item[3]||'sum')}
 function chrome(){
  const h=NAV.map(n=>`<a href="#${n[1]}" onclick='handleNav(${JSON.stringify(n)})' class="nav-link hover:underline">${n[0]}</a>`).join('');
  $('#nav1').innerHTML=h;$('#nav2').innerHTML=h;
@@ -50,7 +50,11 @@ function chrome(){
  $('#fab').innerHTML=lee('help',48);
 }
 function go(r,sec){S.role=r;S.page='home';S.modal=null;render();if(sec)setTimeout(()=>document.getElementById(sec)?.scrollIntoView(),50);else scrollTo(0,0)}
-function openLearningHub(tab='SNBT',sub='sum'){S.role='student';S.page='home';S.tab=tab;S.subj=tab==='SNBT'?'PK':'Fisika';S.sub=sub;S.programOpen=true;render();requestAnimationFrame(()=>document.getElementById('materi-hub')?.scrollIntoView({behavior:'smooth',block:'start'}))}
+function openLearningHub(tab='SNBT',sub='sum'){
+ S.role='student';
+ if(tab==='SNBT'){S.page='snbt';S.snbtFeatureOpen=sub==='soal'?1:sub==='men'?2:sub==='sum'?0:-1;render();if(S.snbtFeatureOpen>=0)requestAnimationFrame(()=>document.getElementById('snbt-bank')?.scrollIntoView({behavior:'smooth',block:'start'}));else scrollTo(0,0);return}
+ S.page='home';S.tab=tab;S.subj='Fisika';S.sub=sub;S.programOpen=true;render();requestAnimationFrame(()=>document.getElementById('materi-hub')?.scrollIntoView({behavior:'smooth',block:'start'}))
+}
 function openProgram(tab,trigger){
  if(trigger){trigger.classList.add('is-zooming');trigger.setAttribute('aria-busy','true')}
  setTimeout(()=>{if(tab==='SNBT'){S.role='student';S.page='snbt';render();scrollTo(0,0);return}S.page='home';S.tab=tab;S.subj='Fisika';S.sub='sum';S.programOpen=true;render();requestAnimationFrame(()=>document.getElementById('materi-hub')?.scrollIntoView({behavior:'smooth',block:'start'}))},trigger?260:0);
@@ -96,13 +100,23 @@ function mentorCard(m,compact){
  <div class="flex items-center justify-between mt-auto pt-2"><div><div class="font-extrabold text-sm">${rp(m.free>0?0:m.price)}</div>${m.free>0?`<span class="gold">Sesi Gratis Tersedia (${m.free})</span>`:`<span class="text-xs mu">/ sesi 45 menit</span>`}</div>
  <button class="btn btn-p" onclick="openBook('${m.id}')">Konsultasi</button></div></div>`;
 }
+function toggleSnbtFeature(index){S.snbtFeatureOpen=S.snbtFeatureOpen===index?-1:index;render();if(S.snbtFeatureOpen>=0)requestAnimationFrame(()=>document.getElementById('snbt-bank')?.scrollIntoView({behavior:'smooth',block:'start'}))}
+function toggleSnbtBank(){toggleSnbtFeature(1)}
+function scrollSnbtRail(id,direction){const rail=document.getElementById(id);if(rail)rail.scrollBy({left:direction*Math.max(rail.clientWidth*.78,280),behavior:'smooth'})}
+function snbtShortcutAction(i,item){return i<3?'toggleSnbtFeature('+i+')':"openLearningHub('TKA','sum')"}
+function snbtFeatureView(featureIndex){
+ const featureDefs=[['Ringkasan Materi SNBT','Pilih subtes untuk melihat ruang ringkasan.','Ruang ringkasan'],['Bank Soal SNBT','Pilih subtes untuk melihat ruang latihan soal.','Ruang bank soal'],['Konsultasi Mentor SNBT','Pilih subtes untuk melihat ruang konsultasi mentor.','Ruang konsultasi']];
+ const [title,description,slotLabel]=featureDefs[featureIndex]||featureDefs[1];
+ const badgeText=featureIndex===2?'Mentor':'Gratis';
+ const groups=[['I. Tes Potensi Skolastik (TPS)',[['PPU','Pengetahuan dan Pemahaman Umum'],['PBM','Kemampuan Memahami Bacaan dan Menulis'],['PK','Pengetahuan Kuantitatif']]],['II. Tes Literasi',[['LBI','Literasi dalam Bahasa Indonesia'],['LBE','Literasi dalam Bahasa Inggris'],['PM','Penalaran Matematika']]]];
+ return `<section id="snbt-bank" class="snbt-bank-section"><header class="snbt-bank-heading"><span class="snbt-section-kicker">Persiapan SNBT</span><h2>${title}</h2><p>${description}</p></header>${groups.map((group,index)=>{const railId='snbt-rail-'+index;return `<div class="snbt-subtest-group"><div class="snbt-subtest-heading"><h3>${group[0]}</h3><div class="snbt-rail-controls"><button type="button" aria-label="Geser subtes ke kiri" onclick="scrollSnbtRail('${railId}',-1)">&larr;</button><button type="button" aria-label="Geser subtes ke kanan" onclick="scrollSnbtRail('${railId}',1)">&rarr;</button></div></div><div id="${railId}" class="snbt-subtest-rail">${group[1].map(([code,name])=>`<article class="snbt-material-card"><div class="snbt-material-cover"><div class="snbt-cover-top"><b>Learnee</b><span>${badgeText}</span></div><div class="snbt-cover-copy"><small>${code} - Persiapan SNBT</small><b>${name}</b></div><img src="./assets/maskot-bandeng-standing.png?v=1" alt="" loading="lazy"><i class="snbt-cover-decoration"></i></div><div class="snbt-material-info"><span class="material-status">${slotLabel}</span><h4>${name}</h4><div class="material-empty-slot" aria-label="${slotLabel} yang akan ditambahkan"></div><button type="button" class="material-empty-button" disabled>${slotLabel} menyusul</button></div></article>`).join('')}</div></div>`}).join('')}</section>`;
+}
 function snbtLandingView(){
- const shortcuts=[['Ringkasan Materi','Baca materi yang tersimpan dan tetap bisa diakses offline.','sum','▤'],['Bank Soal SNBT','Latihan soal dan lihat pembahasan langkah demi langkah.','soal','✎'],['Konsultasi Mentor','Diskusikan soal bersama mentor online atau offline.','men','♧'],['Persiapan TKA','Lanjutkan belajar materi TKA SMA/SMK.','sum','✦']];
+ const shortcuts=[['Ringkasan Materi','Baca materi yang tersimpan dan tetap bisa diakses offline.','sum','▤'],['Bank Soal SNBT','Ruang latihan soal untuk setiap subtes SNBT.','soal','✎'],['Konsultasi Mentor','Diskusikan soal bersama mentor online atau offline.','men','♧']];
  return `<div class="snbt-landing-page">
   <section class="snbt-landing-hero"><div class="snbt-hero-inner"><div class="snbt-hero-copy"><span class="snbt-eyebrow"><i></i> Belajar lebih tenang bersama Learnee</span><h1>Belajar SNBT Tanpa Takut Sinyal Hilang</h1><p>Gratis, bisa dibuka offline, dan siap dibantu mentor kapan pun kamu butuh.</p><div class="snbt-hero-actions"><button class="snbt-primary-button" onclick="openLearningHub('SNBT','sum')">Mulai Belajar Gratis <span>→</span></button><span class="snbt-no-cost">Gratis · Materi offline · Mentor</span></div></div><div class="snbt-hero-art"><div class="snbt-art-glow"></div><img src="./assets/kak-denny-papan.png" alt="Kak Denny siap membantu persiapan SNBT dan TKA" loading="eager"><div class="snbt-art-note"><span>✓</span><div><b>Belajar tetap lanjut</b><small>Materi tersimpan offline</small></div></div><span class="snbt-art-spark" aria-hidden="true">✳</span></div></div></section>
-  <section class="snbt-shortcuts"><div class="snbt-shortcuts-heading"><div><span class="snbt-section-kicker">Mulai dari sini</span><h2>Belajar sesuai kebutuhanmu</h2></div><button class="snbt-link-button" onclick="openLearningHub('SNBT','sum')">Lihat semua materi <span>→</span></button></div><div class="snbt-shortcut-grid">${shortcuts.map((item,i)=>`<button class="snbt-shortcut-card shortcut-${i+1}" onclick="openLearningHub('${i===3?'TKA':'SNBT'}','${item[2]}')"><span class="shortcut-icon" aria-hidden="true">${item[3]}</span><span class="shortcut-copy"><b>${item[0]}</b><small>${item[1]}</small></span><span class="shortcut-arrow" aria-hidden="true">→</span></button>`).join('')}</div></section>
-  <section class="snbt-promise"><span class="promise-icon" aria-hidden="true">∞</span><div><b>Belajar fleksibel, tanpa takut kehilangan koneksi</b><p>Ringkasan dan bank soal tersimpan di perangkat. Saat online, lanjutkan latihan atau hubungi mentor kapan pun kamu perlu.</p></div><button onclick="openLearningHub('SNBT','men')">Cari Mentor <span>→</span></button></section>
- </div>`;
+  <section class="snbt-shortcuts"><div class="snbt-shortcuts-heading"><div><span class="snbt-section-kicker">Mulai dari sini</span><h2>Belajar sesuai kebutuhanmu</h2></div><button class="snbt-link-button" onclick="toggleSnbtFeature(0)">Lihat semua materi <span>→</span></button></div><div class="snbt-shortcut-grid">${shortcuts.map((item,i)=>`<button class="snbt-shortcut-card shortcut-${i+1} ${i<3&&S.snbtFeatureOpen===i?'is-selected':''}" onclick="${snbtShortcutAction(i,item)}"><span class="shortcut-icon" aria-hidden="true">${item[3]}</span><span class="shortcut-copy"><b>${item[0]}</b><small>${item[1]}</small></span><span class="shortcut-arrow" aria-hidden="true">→</span></button>`).join('')}</div></section>${S.snbtFeatureOpen>=0?snbtFeatureView(S.snbtFeatureOpen):''}
+   </div>`;
 }
 function studentView(){
  const list=S.tab==='SNBT'?SN:TK, bank=getBank(S.subj);
@@ -182,7 +196,7 @@ function studentView(){
 </section>
 <footer class="border-t bd pt-8 mt-8 grid md:grid-cols-3 gap-6 text-sm"><div><b class="footer-brand text-lg">Learnee</b><p class="mu mt-1">Belajar bebas batas, tembus PTN impian.</p></div><div><b>Navigasi</b><p class="mu mt-1">Beranda · Sesi SNBT · Sesi TKA · FAQ</p></div><div><b>Kontak</b><p class="mu mt-1">bantuan@learnee.id · @learnee.id</p></div>
 <p class="md:col-span-3 mu text-xs">Proyek lomba Web Development bertema pendidikan.</p>
-<details class="md:col-span-3 text-xs mu"><summary class="cursor-pointer font-bold">Kode sw.js (Service Worker)</summary><pre class="overflow-x-auto p-3 card mt-2">const C='learnee-v7';
+<details class="md:col-span-3 text-xs mu"><summary class="cursor-pointer font-bold">Kode sw.js (Service Worker)</summary><pre class="overflow-x-auto p-3 card mt-2">const C='learnee-v10';
 self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(['./','./index.html','./style.css','./script.js','./assets/maskot-bandeng.png?v=2','./assets/maskot-bandeng-standing.png?v=1','./assets/kak-denny-papan.png','./assets/kak-denny-nunjuk-kiri.png']))));
 self.addEventListener('fetch',e=>e.respondWith(fetch(e.request).then(r=>{const k=r.clone();caches.open(C).then(c=>c.put(e.request,k));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html')))));</pre></details></footer>`;
 }
