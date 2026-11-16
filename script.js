@@ -50,7 +50,6 @@ function chrome(){
  n.textContent=o?'● Mode Offline':'● Status: Online';
  n.classList.toggle('is-offline',o);n.classList.toggle('is-online',!o);
  $('#role').value=S.role;
- $('#fab').innerHTML=lee('help',48);
 }
 function go(r,sec){S.role=r;S.page='home';S.modal=null;render();if(sec)setTimeout(()=>document.getElementById(sec)?.scrollIntoView(),50);else scrollTo(0,0)}
 function openMentoringPage(){S.role='student';S.page='mentoring';S.snbtFeatureOpen=-1;S.mentorSubject='Semua';S.mentorSearch='';render();scrollTo(0,0)}
@@ -285,6 +284,5 @@ document.querySelector('[data-action="home"]')?.addEventListener('click',()=>go(
 document.querySelector('[data-action="start-learning"]')?.addEventListener('click',()=>go('student','sesi'));
 $('#role')?.addEventListener('change',e=>go(e.currentTarget.value));
 $('#modal').addEventListener('click',e=>{if(e.target.id==='modal'&&S.modal&&S.modal.t!=='rate')closeM()});
-$('#fab').addEventListener('click',helpLee);
 try{navigator.serviceWorker&&navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}
 render();
