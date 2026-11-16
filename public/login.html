@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Learnee — Masuk Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Token sama dengan style.css Learnee */
+  :root{
+    --bg:#f8fbff; --sf:#fff; --tx:#18202c; --mu:#626d7e; --bd:#e6edf2;
+    --pb:#4f46d8; --pb-dark:#4338ca; --err:#dc2626; --err-bg:#fef2f2;
+    color-scheme:light;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:'Plus Jakarta Sans',Inter,system-ui,sans-serif;
+    color:var(--tx);
+    letter-spacing:-.01em;
+    background-color:#f8fbff;
+    background-image:
+      radial-gradient(circle,rgba(95,138,164,.12) .8px,transparent .9px),
+      radial-gradient(ellipse at 12% 13%,rgba(176,235,250,.45),transparent 31%),
+      radial-gradient(ellipse at 87% 20%,rgba(224,247,160,.38),transparent 28%);
+    background-size:18px 18px,auto,auto;
+    background-attachment:fixed;
+  }
+  .page{
+    min-height:100%;
+    display:grid;
+    place-items:center;
+    padding:max(20px,env(safe-area-inset-top)) 20px max(20px,env(safe-area-inset-bottom));
+  }
+  .shell{
+    width:100%;
+    max-width:980px;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:40px;
+    align-items:center;
+  }
+
+  /* Sisi kiri: maskot + pesan (hanya desktop) */
+  .intro{display:none}
+  .intro img{
+    display:block;
+    width:min(100%,360px);
+    height:auto;
+    margin:0 0 24px;
+  }
+  .intro h2{
+    margin:0 0 10px;
+    font-size:2rem;
+    line-height:1.2;
+    font-weight:800;
+    color:#172554;
+    max-width:15em;
+  }
+  .intro p{
+    margin:0;
+    color:var(--mu);
+    line-height:1.65;
+    max-width:30em;
+  }
+
+  /* Kartu login */
+  .card{
+    width:100%;
+    max-width:420px;
+    margin:0 auto;
+    background:var(--sf);
+    border:1px solid #ececf4;
+    border-radius:20px;
+    box-shadow:0 12px 32px rgba(37,57,89,.1);
+    padding:28px 26px 24px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--pb);
+    font-weight:800;
+    font-size:1.25rem;
+    text-decoration:none;
+  }
+  .brand img{width:38px;height:38px;object-fit:cover}
+  .brand small{font-size:.85rem;font-weight:600;color:var(--mu)}
+  h1{
+    margin:22px 0 4px;
+    font-size:1.5rem;
+    font-weight:800;
+    color:#172554;
+    line-height:1.25;
+  }
+  .sub{margin:0 0 20px;color:var(--mu);font-size:.9rem;line-height:1.55}
+
+  label{display:block;margin:0 0 6px;font-size:.82rem;font-weight:700;color:#26324a}
+  .field{margin-bottom:14px}
+  .inp{
+    width:100%;
+    border:1px solid #dce3ee;
+    background:#fbfcff;
+    color:#172554;
+    border-radius:12px;
+    padding:.7rem .85rem;
+    font:inherit;
+    font-size:.92rem;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .inp::placeholder{color:#9aa5b8}
+  .inp:focus{outline:none;border-color:var(--pb);box-shadow:0 0 0 3px rgba(79,70,216,.16)}
+  .pw{position:relative}
+  .pw .inp{padding-right:5.2rem}
+  .toggle{
+    position:absolute;
+    top:50%;right:8px;
+    transform:translateY(-50%);
+    border:0;background:none;
+    color:var(--pb);
+    font:inherit;font-size:.78rem;font-weight:700;
+    padding:.35rem .55rem;
+    border-radius:8px;
+    cursor:pointer;
+  }
+  .toggle:hover{background:#eeebff}
+
+  .btn{
+    width:100%;
+    margin-top:6px;
+    border:1px solid var(--pb);
+    background:var(--pb);
+    color:#fff;
+    border-radius:999px;
+    padding:.8rem 1.1rem;
+    font:inherit;font-weight:700;font-size:.92rem;
+    cursor:pointer;
+    box-shadow:0 7px 18px rgba(81,70,216,.2);
+    transition:background .15s, box-shadow .15s;
+  }
+  .btn:hover{background:var(--pb-dark);box-shadow:0 9px 22px rgba(81,70,216,.27)}
+  .btn:disabled{background:#c9c5f4;border-color:#c9c5f4;box-shadow:none;cursor:not-allowed}
+
+  .pesan{
+    display:none;
+    margin:0 0 14px;
+    padding:.65rem .8rem;
+    border-radius:12px;
+    background:var(--err-bg);
+    color:var(--err);
+    font-size:.85rem;
+    font-weight:600;
+    line-height:1.45;
+  }
+  .pesan.on{display:block}
+
+  .back{
+    display:block;
+    margin-top:18px;
+    text-align:center;
+    font-size:.85rem;
+    font-weight:600;
+    color:var(--mu);
+    text-decoration:none;
+  }
+  .back:hover{color:var(--pb)}
+
+  a:focus-visible,button:focus-visible{outline:3px solid rgba(79,70,216,.4);outline-offset:2px}
+
+  @media (min-width:900px){
+    .shell{grid-template-columns:1fr 420px;gap:64px}
+    .intro{display:block}
+    .card{margin:0}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="shell">
+
+    <aside class="intro" aria-hidden="false">
+      <img src="./assets/maskot-bandeng-standing.png?v=1" alt="Maskot Learnee">
+      <h2>Kelola materi dan verifikasi mentor di satu tempat.</h2>
+      <p>Unggah materi PDF, tayangkan atau tarik dari katalog, dan periksa pengajuan mentor baru dari dashboard admin.</p>
+    </aside>
+
+    <main class="card">
+      <a class="brand" href="./index.html">
+        <img src="./assets/maskot-bandeng.png?v=2" alt="">
+        <span>Learnee <small>Admin Workspace</small></span>
+      </a>
+
+      <h1>Masuk sebagai admin</h1>
+      <p class="sub">Gunakan email dan password akun admin yang terdaftar.</p>
+
+      <form id="formAdmin" novalidate>
+        <div id="pesan" class="pesan" role="alert" aria-live="polite"></div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input class="inp" id="email" type="email" autocomplete="username" placeholder="nama@email.com" required>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="pw">
+            <input class="inp" id="password" type="password" autocomplete="current-password" placeholder="Masukkan password" required>
+            <button class="toggle" id="toggle" type="button" aria-controls="password" aria-pressed="false">Lihat</button>
+          </div>
+        </div>
+
+        <button class="btn" id="btn" type="submit">Masuk</button>
+      </form>
+
+      <a class="back" href="./index.html">Kembali ke situs</a>
+    </main>
+
+  </div>
+</div>
+
+<script type="module">
+  import { auth } from "./js/firebase-config.js";
+  import { signInWithEmailAndPassword, onAuthStateChanged }
+    from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+  const $ = (id) => document.getElementById(id);
+  const pesan = $("pesan"), btn = $("btn");
+
+  // Kalau sudah login, langsung ke dashboard
+  onAuthStateChanged(auth, (u) => { if (u) location.replace("admin.html"); });
+
+  // Lihat / sembunyikan password
+  $("toggle").addEventListener("click", () => {
+    const tampil = $("password").type === "password";
+    $("password").type = tampil ? "text" : "password";
+    $("toggle").textContent = tampil ? "Sembunyikan" : "Lihat";
+    $("toggle").setAttribute("aria-pressed", String(tampil));
+  });
+
+  const teksError = {
+    "auth/invalid-credential": "Email atau password salah. Periksa lagi, lalu coba masuk.",
+    "auth/invalid-email": "Format email belum benar. Contoh: nama@email.com.",
+    "auth/user-disabled": "Akun ini dinonaktifkan. Hubungi pemilik project.",
+    "auth/too-many-requests": "Terlalu banyak percobaan. Tunggu beberapa menit, lalu coba lagi.",
+    "auth/network-request-failed": "Tidak ada koneksi internet. Periksa jaringan, lalu coba lagi.",
+    "auth/operation-not-allowed": "Login email/password belum diaktifkan di Firebase Console.",
+    "auth/unauthorized-domain": "Domain ini belum didaftarkan di Authorized domains Firebase."
+  };
+
+  function tampilError(teks) { pesan.textContent = teks; pesan.classList.add("on"); }
+
+  $("formAdmin").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    pesan.classList.remove("on");
+
+    const email = $("email").value.trim();
+    const password = $("password").value;
+    if (!email || !password) return tampilError("Isi email dan password terlebih dahulu.");
+
+    btn.disabled = true;
+    btn.textContent = "Memeriksa…";
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      location.replace("admin.html");
+    } catch (err) {
+      tampilError(teksError[err.code] || "Login gagal (" + err.code + ").");
+      btn.disabled = false;
+      btn.textContent = "Masuk";
+    }
+  });
+</script>
+</body>
+</html>
