@@ -154,5 +154,35 @@ window.LEARNEE_MATERIALS = {
       [`Choose the correct sentence: If students ... the instructions carefully, they will avoid common errors.`, [`read`, `reads`, `reading`, `will read`], 0, `In a first conditional sentence, the if-clause uses the simple present: “If students read ..., they will ...”.`],
       [`A procedure says, “Do not unplug the router while the update is running.” This sentence is ...`, [`a warning about an action to avoid`, `an offer of assistance`, `a travel recommendation`, `a past event`], 0, `“Do not” gives a clear negative instruction to prevent a problem.`]
     ]
+  },
+  'Matematika': {
+    s: `<strong>Matematika Wajib TKA</strong><br>Latihan ini menguatkan aljabar, perbandingan, statistika, peluang, dan pemodelan masalah sehari-hari.<br><br><strong>Strategi:</strong> catat informasi yang diketahui, tentukan konsep yang dipakai, hitung dengan satuan yang konsisten, lalu periksa kembali hasilnya. Untuk soal cerita, ubah hubungan antarbesaran menjadi persamaan atau rasio sebelum menghitung.`,
+    q: [
+      [`Jika 2x + 7 = 19, nilai x adalah ...`, [`5`, `6`, `12`, `13`], 1, `Kurangi kedua ruas dengan 7: 2x=12. Bagi kedua ruas dengan 2 sehingga x=6.`],
+      [`Harga 3 buku adalah Rp45.000. Dengan harga satuan yang sama, harga 5 buku adalah ...`, [`Rp60.000`, `Rp70.000`, `Rp75.000`, `Rp90.000`], 2, `Harga satu buku Rp45.000/3=Rp15.000. Jadi 5 buku berharga 5×Rp15.000=Rp75.000.`],
+      [`Rata-rata nilai 70, 80, dan 90 adalah ...`, [`75`, `80`, `85`, `90`], 1, `Rata-rata=(70+80+90)/3=240/3=80.`],
+      [`Sebuah kantong berisi 3 bola merah dan 5 bola biru. Peluang mengambil bola merah adalah ...`, [`3/8`, `5/8`, `1/3`, `3/5`], 0, `Ada 3 bola merah dari total 3+5=8 bola. Peluangnya 3/8.`],
+      [`Sebuah kendaraan menempuh 120 km dalam 2 jam. Kecepatan rata-ratanya adalah ...`, [`40 km/jam`, `50 km/jam`, `60 km/jam`, `240 km/jam`], 2, `Kecepatan rata-rata=jarak/waktu=120/2=60 km/jam.`]
+    ]
+  },
+  'Bahasa Indonesia': {
+    s: `<strong>Bahasa Indonesia Wajib TKA</strong><br>Latih pemahaman gagasan utama, simpulan, fakta dan opini, makna kata dalam konteks, kalimat efektif, serta ketepatan penggunaan konjungsi.<br><br><strong>Strategi membaca:</strong> temukan bukti pada teks sebelum memilih jawaban. Simpulan tidak boleh melampaui informasi yang tersedia. Untuk kalimat efektif, hindari pemborosan kata dan pastikan hubungan antargagasan dinyatakan dengan tepat.`,
+    q: [
+      [`Bacalah kalimat berikut: “Perpustakaan membuka layanan hingga sore. Jumlah siswa yang membaca di tempat meningkat.” Simpulan yang paling tepat adalah ...`, [`Perpanjangan layanan diikuti peningkatan jumlah pembaca di tempat.`, `Semua siswa kini meminjam buku.`, `Perpustakaan akan tutup pada sore hari.`, `Jumlah buku bertambah dua kali lipat.`], 0, `Simpulan A merangkum dua informasi yang benar-benar disebutkan tanpa menambah klaim lain.`],
+      [`Kalimat yang paling efektif adalah ...`, [`Para peserta-peserta diminta untuk agar hadir.`, `Peserta diminta hadir tepat waktu.`, `Kepada peserta diminta agar supaya hadir.`, `Peserta adalah merupakan pihak yang diminta hadir.`], 1, `Kalimat B ringkas dan tidak mengulang penanda jamak atau kata yang tidak diperlukan.`],
+      [`Dalam kalimat “Warga memilah sampah agar bahan yang masih berguna dapat didaur ulang”, kata “agar” menyatakan hubungan ...`, [`pertentangan`, `tujuan`, `perbandingan`, `akibat yang tidak disengaja`], 1, `Klausa setelah “agar” menjelaskan tujuan warga memilah sampah.`],
+      [`Pernyataan yang termasuk opini adalah ...`, [`Rapat dimulai pukul 09.00.`, `Laporan memuat tiga tabel.`, `Program itu merupakan cara paling menarik untuk belajar.`, `Kegiatan berlangsung di aula sekolah.`], 2, `“Paling menarik” merupakan penilaian subjektif, sehingga termasuk opini.`],
+      [`Makna kata “kredibel” pada kalimat “Pembaca sebaiknya memilih sumber yang kredibel” adalah ...`, [`dapat dipercaya`, `mudah ditemukan`, `sangat singkat`, `berwarna menarik`], 0, `Sumber kredibel adalah sumber yang dapat dipercaya dan dipertanggungjawabkan.`]
+    ]
+  },
+  'Bahasa Inggris': {
+    s: `<strong>Bahasa Inggris Wajib TKA</strong><br>Practice reading for main ideas, stated details, inference, vocabulary in context, and basic grammar in meaningful sentences.<br><br><strong>Reading strategy:</strong> identify the question first, scan the passage for supporting evidence, and reject choices that add information not stated. For grammar, check the subject, verb form, tense markers, and relationship between clauses.`,
+    q: [
+      [`Read: “Mira brings a reusable bottle to school every day. She wants to reduce plastic waste.” Why does Mira bring the bottle?`, [`To reduce plastic waste.`, `To sell it to her friends.`, `To keep her books dry.`, `To avoid going to school.`], 0, `The second sentence directly states Mira's reason: she wants to reduce plastic waste.`],
+      [`Choose the correct verb: “The students ___ English every Monday.”`, [`studies`, `study`, `studying`, `is study`], 1, `The plural subject “students” takes the base verb “study” in the simple present.`],
+      [`The word “ ancient ” in “The town is famous for its ancient temple” is closest in meaning to ...`, [`very old`, `very noisy`, `newly built`, `far away`], 0, `“Ancient” means belonging to a very distant time, or very old.`],
+      [`Read: “The school garden has vegetables and flowers. Students water the plants before class.” What do students do before class?`, [`They water the plants.`, `They harvest all the vegetables.`, `They buy flowers.`, `They clean the library.`], 0, `The passage explicitly says that students water the plants before class.`],
+      [`Choose the best connector: “It was raining, ___ the match continued.”`, [`because`, `but`, `so that`, `for example`], 1, `“But” correctly connects two contrasting ideas: rain and the match continuing.`]
+    ]
   }
 };
