@@ -1,4 +1,4 @@
-const C='learnee-v32'
+const C='learnee-v35'
 self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(['./','./index.html','./login%20guru.html','./js/firebase-config.js','./style.css','./script.js','./content-bank.js','./question-engine.js','./assets/maskot-bandeng.png?v=2','./assets/maskot-bandeng-standing.png?v=2','./assets/maskot-bandeng-logo.png?v=1','./assets/maskot-bandeng-standing.png?v=1','./assets/kak-denny-papan.png','./assets/kak-denny-nunjuk-kiri.png','./assets/kak%20dimas.jpg']))));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x))))));
 self.addEventListener('fetch',e=>{
